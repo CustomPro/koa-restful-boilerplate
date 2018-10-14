@@ -1,10 +1,10 @@
-import bodyParser from 'koa-bodyparser';
-import Koa from 'koa';
-import logger from 'koa-logger';
-import mongoose from 'mongoose';
-import helmet from 'koa-helmet';
-import routing from './routes/';
-import { port, connectionString } from './config';
+import bodyParser from 'koa-bodyparser'
+import Koa from 'koa'
+import logger from 'koa-logger'
+import mongoose from 'mongoose'
+import helmet from 'koa-helmet'
+import routing from './routes/'
+import { port, connectionString } from './config'
 
 mongoose.connect(connectionString);
 mongoose.connection.on('error', console.error);
