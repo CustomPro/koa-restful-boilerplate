@@ -1,5 +1,6 @@
-import User from '../models/user';
+import User from '../models/user'
 import nodemailer from 'nodemailer'
+import mandrillTransport from 'nodemailer-mandrill-transport'
 
 class UsersControllers {
   /* eslint-disable no-param-reassign */
@@ -42,27 +43,26 @@ class UsersControllers {
         ctx.body = {state:"error", message:"duplicated email"}
       } else {
         const user = await new User(ctx.request.body).save();
-        let transporter = nodemailer.createTransport({
-            service: "outlook",
-            auth:{
-              user: "kiros.matavastros@outlook.com",
-              pass: "qweASD1@#"
+        var smtpTransport = nodemailer.createTransport(mandrillTransport({
+            auth: {
+              apiKey : 'UjpcnkcWdI4ZFYykHGPAtg'
             }
-          })
-          let mailOptions = {
-            from: "kiros.matavastros@outlook.com",
-            to: ctx.request.body.email,
-            subject: "Welcome",
-            text: "Welcome"
-          }
-          transporter.sendMail(mailOptions, function(error, info){
-            if(error){
-              console.log(error)
-            } else {
-              console.log('Email send:' + info.response)
-            }
+        }));
+        let mailOptions={
+           from : 'services@jrni.co',
+           to : ctx.request.body.email,
+           subject : "Welcome",
+           html : "Welcome to Koa"
+        };
 
-          })
+        // Sending email.
+        smtpTransport.sendMail(mailOptions, function(error, response){
+          if(error) {
+             throw new Error("Error in sending email");
+          }
+          console.log("Message sent: " + JSON.stringify(response));
+        });
+
         ctx.body = user;
       }
     } catch (err) {
