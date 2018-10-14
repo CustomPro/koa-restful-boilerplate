@@ -14,7 +14,7 @@
   ],
   "main": "server/index.js",
   "scripts": {
-    "start": "node server/ --exec babel-node",
+    "start": "nodemon server/ --exec babel-node",
     "build": "babel server -d dist",
     "lint": "eslint ./server",
     "test": "npm run lint && npm run mocha",
