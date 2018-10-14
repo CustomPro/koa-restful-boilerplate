@@ -37,8 +37,8 @@ class UsersControllers {
    */
   async add(ctx) {
     try {
-      const emails = await User.count({"email":ctx.request.body.email})
-      if(emails > 0){
+      const emails = await User.find({"email":ctx.request.body.email})
+      if(emails.length > 0){
         ctx.body = {state:"error", message:"duplicated email"}
       } else {
         const user = await new User(ctx.request.body).save();
