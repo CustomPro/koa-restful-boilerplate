@@ -12,6 +12,9 @@
     "async",
     "es6"
   ],
+  "engines": {
+    "node": "8.11.4"
+  },
   "main": "server/index.js",
   "scripts": {
     "start": "node server/ --exec babel-node",
