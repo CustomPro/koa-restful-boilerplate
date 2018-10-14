@@ -1,4 +1,5 @@
 import User from '../models/user';
+import nodemailer from 'nodemailer'
 
 class UsersControllers {
   /* eslint-disable no-param-reassign */
@@ -36,8 +37,34 @@ class UsersControllers {
    */
   async add(ctx) {
     try {
-      const user = await new User(ctx.request.body).save();
-      ctx.body = user;
+      const emails = await User.count({"email":ctx.request.body.email})
+      if(emails > 0){
+        ctx.body = {state:"error", message:"duplicated email"}
+      } else {
+        const user = await new User(ctx.request.body).save();
+        let transporter = nodemailer.createTransport({
+            service: "outlook",
+            auth:{
+              user: "kiros.matavastros@outlook.com",
+              pass: "qweASD1@#"
+            }
+          })
+          let mailOptions = {
+            from: "kiros.matavastros@outlook.com",
+            to: ctx.request.body.email,
+            subject: "Welcome",
+            text: "Welcome"
+          }
+          transporter.sendMail(mailOptions, function(error, info){
+            if(error){
+              console.log(error)
+            } else {
+              console.log('Email send:' + info.response)
+            }
+
+          })
+        ctx.body = user;
+      }
     } catch (err) {
       ctx.throw(422);
     }
