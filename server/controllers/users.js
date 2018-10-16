@@ -38,33 +38,9 @@ class UsersControllers {
    */
   async add(ctx) {
     try {
-      const emails = await User.find({"email":ctx.request.body.email})
-      if(emails.length > 0){
-        ctx.body = {state:"error", message:"duplicated email"}
-      } else {
         const user = await new User(ctx.request.body).save();
-        var smtpTransport = nodemailer.createTransport(mandrillTransport({
-            auth: {
-              apiKey : 'UjpcnkcWdI4ZFYykHGPAtg'
-            }
-        }));
-        let mailOptions={
-           from : 'services@jrni.co',
-           to : ctx.request.body.email,
-           subject : "Welcome",
-           html : "Welcome to Koa"
-        };
-
-        // Sending email.
-        smtpTransport.sendMail(mailOptions, function(error, response){
-          if(error) {
-             throw new Error("Error in sending email");
-          }
-          console.log("Message sent: " + JSON.stringify(response));
-        });
-
         ctx.body = user;
-      }
+
     } catch (err) {
       ctx.throw(422);
     }

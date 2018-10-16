@@ -22,7 +22,8 @@
     "lint": "eslint ./server",
     "test": "npm run lint && npm run mocha",
     "prod": "npm run build && node dist/",
-    "mocha": "./node_modules/.bin/mocha --compilers js:babel-register --require babel-polyfill --exit"
+    "mocha": "./node_modules/.bin/mocha --compilers js:babel-register --require babel-polyfill --exit",
+    "send": "nodemon server/send.js --exec babel-node"
   },
   "dependencies": {
     "babel-polyfill": "^6.5.0",
