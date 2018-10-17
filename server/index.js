@@ -6,7 +6,7 @@ import helmet from 'koa-helmet'
 import routing from './routes/'
 import { port, connectionString } from './config'
 
-mongoose.connect(connectionString);
+mongoose.connect(connectionString, { useNewUrlParser: true });
 mongoose.connection.on('error', console.error);
 
 // Create Koa Application

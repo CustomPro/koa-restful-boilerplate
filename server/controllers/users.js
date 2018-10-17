@@ -1,6 +1,4 @@
 import User from '../models/user'
-import nodemailer from 'nodemailer'
-import mandrillTransport from 'nodemailer-mandrill-transport'
 
 class UsersControllers {
   /* eslint-disable no-param-reassign */
