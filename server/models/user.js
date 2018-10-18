@@ -15,12 +15,7 @@ const userSchema = new Schema({
     required: true
   },
   country: String,
-  zipCode: Number,
-  updated: {
-    type: Date,
-    default: Date.now
-  }
-
+  zipCode: Number
 });
 userSchema.plugin(timestamps);
 

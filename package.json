@@ -23,7 +23,7 @@
     "test": "npm run lint && npm run mocha",
     "prod": "npm run build && node dist/",
     "mocha": "./node_modules/.bin/mocha --compilers js:babel-register --require babel-polyfill --exit",
-    "send": "nodemon server/send.js --exec babel-node"
+    "send": "node dist/send.js"
   },
   "dependencies": {
     "babel-polyfill": "^6.5.0",
