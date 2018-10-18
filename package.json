@@ -36,6 +36,7 @@
     "koa-logger": "^3.1.0",
     "koa-router": "^7.3.0",
     "mongoose": "^5.0.1",
+    "mongoose-timestamp": "^0.6.0",
     "nodemailer": "^4.6.8",
     "nodemailer-mandrill-transport": "^1.2.0"
   },

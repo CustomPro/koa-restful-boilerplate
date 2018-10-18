@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
+import timestamps from 'mongoose-timestamp'
 
 const { Schema } = mongoose;
 
@@ -23,6 +24,8 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now
   }
+
 });
+userSchema.plugin(timestamps);
 
 export default mongoose.model('User', userSchema);
