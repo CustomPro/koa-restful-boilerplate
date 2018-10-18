@@ -16,10 +16,6 @@ const userSchema = new Schema({
   },
   country: String,
   zipCode: Number,
-  isnew: {
-    type: Number,
-    default: 1
-  },
   updated: {
     type: Date,
     default: Date.now
